@@ -58,16 +58,14 @@ export function ContactForm() {
       }
       setStatus('success');
       reset();
-    } catch {
-      // Static-export fallback: open the visitor's email client with a pre-filled note.
-      // Replace with a real API endpoint (e.g. Resend) when deploying SSR.
-      const subject = encodeURIComponent(`New inquiry from ${values.name}`);
-      const body = encodeURIComponent(
-        `Name: ${values.name}\nEmail: ${values.email}\nCompany: ${values.company || '—'}\nProject type: ${values.service || '—'}\nTimeline: ${values.timeline || '—'}\nBudget: ${values.budget || '—'}\n\nMessage:\n${values.message}`,
-      );
-      window.location.href = `mailto:admin@goodgoddessalmighty.com?subject=${subject}&body=${body}`;
-      setStatus('success');
-      reset();
+    } catch (err) {
+      // Surface the real error to the visitor instead of silently masking it.
+      const message =
+        err instanceof Error
+          ? err.message
+          : 'We couldn’t send your message. Please try again or email admin@goodgoddessalmighty.com.';
+      setErrorMsg(message);
+      setStatus('error');
     }
   };
 

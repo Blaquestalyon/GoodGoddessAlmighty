@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { SmartImage } from '@/components/SmartImage';
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal';
 import { SectionHeader } from '@/components/SectionHeader';
@@ -82,7 +82,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8 grid grid-cols-12 gap-3 sm:gap-4">
           <Reveal className="col-span-12 sm:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden bg-onyx-800">
-              <Image
+              <SmartImage
                 src={ABOUT_FRAMES[0].src}
                 alt={ABOUT_FRAMES[0].alt}
                 fill
@@ -93,7 +93,7 @@ export default function AboutPage() {
           </Reveal>
           <Reveal className="col-span-6 sm:col-span-4" delay={0.1}>
             <div className="relative aspect-square overflow-hidden bg-onyx-800">
-              <Image
+              <SmartImage
                 src={ABOUT_FRAMES[1].src}
                 alt={ABOUT_FRAMES[1].alt}
                 fill
@@ -104,7 +104,7 @@ export default function AboutPage() {
           </Reveal>
           <Reveal className="col-span-6 sm:col-span-3" delay={0.2}>
             <div className="relative aspect-[3/4] overflow-hidden bg-onyx-800">
-              <Image
+              <SmartImage
                 src={ABOUT_FRAMES[2].src}
                 alt={ABOUT_FRAMES[2].alt}
                 fill

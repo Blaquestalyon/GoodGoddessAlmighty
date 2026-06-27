@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { SmartImage } from '@/components/SmartImage';
 import Link from 'next/link';
 import { PORTFOLIO, CATEGORIES } from '@/data/portfolio';
 import { SERVICES, PROCESS, PILLARS, SITE } from '@/data/site';
@@ -25,8 +25,20 @@ const FEATURED = [
 ];
 
 export default function HomePage() {
+  const lcpAvif = HERO_FRAMES[0].src.replace(/\.jpe?g$/i, '.avif');
+  const lcpWebp = HERO_FRAMES[0].src.replace(/\.jpe?g$/i, '.webp');
   return (
     <>
+      {/* Preload the LCP hero in modern formats for a measurable boost. */}
+      <link
+        rel="preload"
+        as="image"
+        href={lcpAvif}
+        type="image/avif"
+        // @ts-expect-error fetchpriority not yet in DOM lib types in some setups
+        fetchpriority="high"
+      />
+      <link rel="preload" as="image" href={lcpWebp} type="image/webp" />
       {/* ----------------------- HERO ----------------------- */}
       <section
         aria-labelledby="hero-heading"
@@ -66,31 +78,32 @@ export default function HomePage() {
             <div className="grid grid-cols-12 gap-3 sm:gap-4">
               <Reveal className="col-span-7 row-span-2" delay={0.15}>
                 <div className="relative aspect-[3/4] overflow-hidden bg-onyx-800">
-                  <Image
+                  <SmartImage
                     src={HERO_FRAMES[0].src}
                     alt={HERO_FRAMES[0].alt}
                     fill
                     sizes="(min-width: 1024px) 30vw, 60vw"
                     className="object-cover"
-                    priority
+                    loading="eager"
+                    fetchPriority="high"
                   />
                 </div>
               </Reveal>
               <Reveal className="col-span-5" delay={0.3}>
                 <div className="relative aspect-square overflow-hidden bg-onyx-800">
-                  <Image
+                  <SmartImage
                     src={HERO_FRAMES[1].src}
                     alt={HERO_FRAMES[1].alt}
                     fill
                     sizes="(min-width: 1024px) 20vw, 40vw"
                     className="object-cover"
-                    priority
+                    loading="eager"
                   />
                 </div>
               </Reveal>
               <Reveal className="col-span-5" delay={0.45}>
                 <div className="relative aspect-[4/5] overflow-hidden bg-onyx-800">
-                  <Image
+                  <SmartImage
                     src={HERO_FRAMES[2].src}
                     alt={HERO_FRAMES[2].alt}
                     fill
@@ -295,7 +308,7 @@ export default function HomePage() {
               return (
                 <Reveal as="li" key={item.src} delay={i * 0.05} className={span}>
                   <div className="relative h-full overflow-hidden bg-onyx-800 aspect-[4/5]">
-                    <Image
+                    <SmartImage
                       src={item.src}
                       alt={item.alt}
                       fill

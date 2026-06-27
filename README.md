@@ -164,14 +164,28 @@ Items that must be reviewed or supplied by the client before launch:
 
 ## Refreshing or replacing brand assets
 
-The 106 brand images shipped in `public/images/` were downloaded from the legacy Wix CDN and resized to a 1600px max edge.
+Every image in `public/images/` ships in three formats:
 
-To re-download (e.g. if the client adds new media):
+- `.avif` — modern, ~22% the size of the original (served first to ~95% of visitors)
+- `.webp` — solid fallback for Safari ≤15 and older browsers
+- `.jpg` — universal fallback
+
+Total payload across all 106 images is ~5 MB of AVIF (vs. 23 MB of unoptimised JPEG). The `SmartImage` component in `src/components/SmartImage.tsx` emits a `<picture>` element so the browser picks the best supported format automatically.
+
+To refresh assets after the client adds new media:
 
 ```bash
-bash scripts/download-assets.sh     # pulls full-resolution originals
-python3 scripts/optimize-images.py  # resizes + re-encodes
+bash scripts/download-assets.sh         # pulls full-resolution originals from the legacy CDN
+pip install pillow-avif-plugin           # one-time, for AVIF encoding
+python3 scripts/optimize-images.py       # resizes + writes .jpg / .webp / .avif companions
 ```
+
+Quality knobs live at the top of `scripts/optimize-images.py`:
+
+- `MAX_EDGE = 1600` — longest dimension after downscale
+- `JPEG_QUALITY = 78` — fallback JPEG quality
+- `WEBP_QUALITY = 72` — WebP quality
+- `AVIF_QUALITY = 35` — AVIF quality (the scale is non-linear; 35 is visually excellent)
 
 To regenerate the portfolio manifest after replacing files in `public/images/`, edit `src/data/portfolio.ts` directly, or write a small build step using the same pattern as `scripts/optimize-images.py`.
 

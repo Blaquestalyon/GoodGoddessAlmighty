@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { SmartImage } from '@/components/SmartImage';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { CATEGORIES, PORTFOLIO, type PortfolioCategory } from '@/data/portfolio';
@@ -98,7 +98,7 @@ export function PortfolioGallery() {
                   style={{ aspectRatio: `${item.w} / ${item.h}` }}
                   aria-label={`Open ${item.alt} in lightbox`}
                 >
-                  <Image
+                  <SmartImage
                     src={item.src}
                     alt={item.alt}
                     fill
@@ -183,13 +183,14 @@ export function PortfolioGallery() {
                 transition={{ duration: 0.25 }}
                 className="relative w-full h-full max-w-6xl"
               >
-                <Image
+                <SmartImage
                   src={active.src}
                   alt={active.alt}
                   fill
                   sizes="100vw"
                   className="object-contain"
-                  priority
+                  loading="eager"
+                  fetchPriority="high"
                 />
               </motion.div>
             </div>

@@ -51,9 +51,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: valid.error }, { status: 400 });
   }
 
-  const token = process.env.AIRTABLE_TOKEN;
-  const baseId = process.env.AIRTABLE_BASE_ID;
-  const tableName = process.env.AIRTABLE_TABLE_NAME;
+  // Trim to defend against trailing whitespace/newlines that sneak in via
+  // dashboard paste (a single trailing space breaks the Authorization header).
+  const token = process.env.AIRTABLE_TOKEN?.trim();
+  const baseId = process.env.AIRTABLE_BASE_ID?.trim();
+  const tableName = process.env.AIRTABLE_TABLE_NAME?.trim();
 
   if (!token || !baseId || !tableName) {
     console.error('[contact] Airtable env vars missing', {

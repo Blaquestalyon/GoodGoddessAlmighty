@@ -28,11 +28,15 @@ function isValid(p: Payload): { ok: true } | { ok: false; error: string } {
 }
 
 /**
- * Contact form handler.
+ * Contact form handler — writes submissions to Airtable.
  *
- * Until an email provider is configured (see .env.example), this endpoint
- * validates input, logs the submission server-side, and returns 200. Replace
- * the `// TODO email delivery` block with a Resend / SMTP / SES call before launch.
+ * Required env vars (set in Railway):
+ *   AIRTABLE_TOKEN       — Personal access token with data.records:write
+ *   AIRTABLE_BASE_ID     — appXXXXXXXXXXXXXX
+ *   AIRTABLE_TABLE_NAME  — e.g. "GGA-Contacts"
+ *
+ * Expected columns in the table (exact, case-sensitive):
+ *   Name, Email, Company, Service, Timeline, Budget, Message, ReceivedAt
  */
 export async function POST(request: Request) {
   let payload: Payload;
@@ -47,35 +51,79 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: valid.error }, { status: 400 });
   }
 
-  // ----- TODO email delivery -----
-  // Option A — Resend:
-  //   if (process.env.RESEND_API_KEY) {
-  //     const { Resend } = await import('resend');
-  //     const resend = new Resend(process.env.RESEND_API_KEY);
-  //     await resend.emails.send({
-  //       from: process.env.CONTACT_FROM_EMAIL!,
-  //       to: process.env.CONTACT_TO_EMAIL!,
-  //       subject: `New inquiry from ${payload.name}`,
-  //       reply_to: payload.email!,
-  //       text: formatBody(payload),
-  //     });
-  //   }
-  //
-  // Option B — SMTP via nodemailer (install `nodemailer` first).
-  // ---------------------------------
+  const token = process.env.AIRTABLE_TOKEN;
+  const baseId = process.env.AIRTABLE_BASE_ID;
+  const tableName = process.env.AIRTABLE_TABLE_NAME;
 
-  // Until then, log to the server so submissions aren't lost during the build.
-  // Railway captures stdout — visible in the deployment logs.
-  console.log('[contact] new inquiry', {
-    name: payload.name,
-    email: payload.email,
-    company: payload.company,
-    service: payload.service,
-    timeline: payload.timeline,
-    budget: payload.budget,
-    message: payload.message,
-    receivedAt: new Date().toISOString(),
-  });
+  if (!token || !baseId || !tableName) {
+    console.error('[contact] Airtable env vars missing', {
+      hasToken: Boolean(token),
+      hasBaseId: Boolean(baseId),
+      hasTableName: Boolean(tableName),
+    });
+    // Don't leak which var is missing to the client; just fail soft.
+    return NextResponse.json(
+      { error: 'The contact form is temporarily unavailable. Please email us directly.' },
+      { status: 503 },
+    );
+  }
 
-  return NextResponse.json({ ok: true });
+  const receivedAt = new Date().toISOString();
+  const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`;
+
+  const body = {
+    records: [
+      {
+        fields: {
+          Name: payload.name!.trim(),
+          Email: payload.email!.trim(),
+          Company: payload.company?.trim() || '',
+          Service: payload.service?.trim() || '',
+          Timeline: payload.timeline?.trim() || '',
+          Budget: payload.budget?.trim() || '',
+          Message: payload.message!.trim(),
+          ReceivedAt: receivedAt,
+        },
+      },
+    ],
+    typecast: true,
+  };
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '');
+      console.error('[contact] Airtable error', {
+        status: res.status,
+        statusText: res.statusText,
+        body: errText.slice(0, 500),
+      });
+      return NextResponse.json(
+        { error: 'We could not save your message. Please try again in a moment.' },
+        { status: 502 },
+      );
+    }
+
+    console.log('[contact] saved to Airtable', {
+      name: payload.name,
+      email: payload.email,
+      receivedAt,
+    });
+
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error('[contact] Airtable request failed', err);
+    return NextResponse.json(
+      { error: 'We could not save your message. Please try again in a moment.' },
+      { status: 502 },
+    );
+  }
 }

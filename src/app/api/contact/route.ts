@@ -51,11 +51,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: valid.error }, { status: 400 });
   }
 
-  // Trim to defend against trailing whitespace/newlines that sneak in via
-  // dashboard paste (a single trailing space breaks the Authorization header).
+  // Sanitize against trailing whitespace, newlines, and stray slashes that
+  // sneak in via dashboard paste — any of those silently break the Airtable URL
+  // or the Authorization header.
   const token = process.env.AIRTABLE_TOKEN?.trim();
-  const baseId = process.env.AIRTABLE_BASE_ID?.trim();
-  const tableName = process.env.AIRTABLE_TABLE_NAME?.trim();
+  const baseId = process.env.AIRTABLE_BASE_ID?.trim().replace(/^\/+|\/+$/g, '');
+  const tableName = process.env.AIRTABLE_TABLE_NAME?.trim().replace(/^\/+|\/+$/g, '');
 
   if (!token || !baseId || !tableName) {
     console.error('[contact] Airtable env vars missing', {

@@ -307,31 +307,20 @@ export default function HomePage() {
             </div>
           </div>
 
-          <ul className="mt-16 grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-6 lg:grid-rows-2">
-            {FEATURED.map((item, i) => {
-              // Editorial asymmetric layout on large screens
-              const span = [
-                'lg:col-span-2 lg:row-span-2',
-                'lg:col-span-2',
-                'lg:col-span-2',
-                'lg:col-span-2',
-                'lg:col-span-2',
-                'lg:col-span-2',
-              ][i];
-              return (
-                <Reveal as="li" key={item.src} delay={i * 0.05} className={span}>
-                  <div className="relative h-full overflow-hidden bg-onyx-800 aspect-[4/5]">
-                    <SmartImage
-                      src={item.src}
-                      alt={item.alt}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, 50vw"
-                      className="object-cover transition-transform duration-700 hover:scale-[1.03]"
-                    />
-                  </div>
-                </Reveal>
-              );
-            })}
+          <ul className="mt-16 grid gap-4 sm:gap-5 grid-cols-2 sm:grid-cols-3">
+            {FEATURED.map((item, i) => (
+              <Reveal as="li" key={item.src} delay={i * 0.05}>
+                <div className="relative overflow-hidden bg-onyx-800 aspect-[4/5]">
+                  <SmartImage
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 50vw"
+                    className="object-cover transition-transform duration-700 hover:scale-[1.03]"
+                  />
+                </div>
+              </Reveal>
+            ))}
           </ul>
         </div>
       </section>

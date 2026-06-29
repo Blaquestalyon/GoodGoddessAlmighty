@@ -44,7 +44,7 @@ export default function HomePage() {
         aria-labelledby="hero-heading"
         className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 bg-ivory-50 overflow-hidden"
       >
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 grid gap-14 lg:grid-cols-12 lg:gap-10 items-end">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 grid gap-14 lg:grid-cols-12 lg:gap-10 lg:items-start">
           <div className="lg:col-span-7 relative z-10">
             <Reveal as="p" className="eyebrow text-champagne-600">
               Boutique experiential marketing · Brand ambassadors
@@ -75,6 +75,19 @@ export default function HomePage() {
 
           {/* Hero composition */}
           <div className="lg:col-span-5 relative">
+            {/* Brand mark above the photo collage */}
+            <Reveal className="mb-5 sm:mb-6" delay={0.05}>
+              <div className="relative mx-auto lg:mx-0 w-40 sm:w-48 lg:w-56 aspect-square">
+                <SmartImage
+                  src="/images/brand/gga-logo.jpg"
+                  alt="Good Goddess Almighty logo"
+                  fill
+                  sizes="(min-width: 1024px) 14rem, (min-width: 640px) 12rem, 10rem"
+                  className="object-contain"
+                  loading="eager"
+                />
+              </div>
+            </Reveal>
             <div className="grid grid-cols-12 gap-3 sm:gap-4">
               <Reveal className="col-span-7 row-span-2" delay={0.15}>
                 <div className="relative aspect-[3/4] overflow-hidden bg-onyx-800">

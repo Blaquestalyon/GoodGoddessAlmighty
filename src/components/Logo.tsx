@@ -47,7 +47,13 @@ export function Logo({
   if (variant === 'stacked') {
     return (
       <div className={`flex flex-col items-center gap-2 ${className}`}>
-        <LogoMark className="h-10 w-10" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/brand/gga-logo.jpg"
+          alt=""
+          aria-hidden="true"
+          className="h-12 w-12 object-contain"
+        />
         <span className="display-serif text-xl leading-none tracking-tight">
           Good Goddess Almighty
         </span>
@@ -56,7 +62,13 @@ export function Logo({
   }
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <LogoMark className="h-8 w-8 shrink-0" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/brand/gga-logo.jpg"
+        alt=""
+        aria-hidden="true"
+        className="h-10 w-10 sm:h-11 sm:w-11 object-contain shrink-0"
+      />
       <span className="display-serif text-lg sm:text-xl leading-none tracking-tight whitespace-nowrap">
         Good Goddess Almighty
       </span>

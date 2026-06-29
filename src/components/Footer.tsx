@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { NAV, SITE } from '@/data/site';
-import { LogoMark } from './Logo';
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -15,7 +14,13 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
-              <LogoMark className="h-10 w-10 text-ivory-50" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/brand/gga-logo.jpg"
+                alt=""
+                aria-hidden="true"
+                className="h-10 w-10 object-contain shrink-0"
+              />
               <span className="display-serif text-2xl">Good Goddess Almighty</span>
             </div>
             <p className="display-serif italic text-3xl mt-8 max-w-md leading-tight">

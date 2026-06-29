@@ -1,20 +1,17 @@
 import { SmartImage } from '@/components/SmartImage';
 import Link from 'next/link';
 import { PORTFOLIO, CATEGORIES } from '@/data/portfolio';
-import { SERVICES, PROCESS, PILLARS, SITE } from '@/data/site';
+
+import { SERVICES, PROOF, PROCESS, PILLARS, SITE } from '@/data/site';
 import { Reveal } from '@/components/Reveal';
 import { SectionHeader } from '@/components/SectionHeader';
 
-// Hero composition: three high-quality verticals from different categories
-// — handpicked to communicate range without claiming any single client.
 const HERO_FRAMES = [
   PORTFOLIO.find((p) => p.src.endsWith('influencer-05.jpg'))!,
   PORTFOLIO.find((p) => p.src.endsWith('events-07.jpg'))!,
   PORTFOLIO.find((p) => p.src.endsWith('fashion-04.jpg'))!,
 ];
 
-// Featured grid (mixed categories) — small curated set on the homepage,
-// users click through to /work for the full portfolio.
 const FEATURED = [
   PORTFOLIO.find((p) => p.src.endsWith('events-12.jpg'))!,
   PORTFOLIO.find((p) => p.src.endsWith('photo-15.jpg'))!,
@@ -29,16 +26,9 @@ export default function HomePage() {
   const lcpWebp = HERO_FRAMES[0].src.replace(/\.jpe?g$/i, '.webp');
   return (
     <>
-      {/* Preload the LCP hero in modern formats for a measurable boost. */}
-      <link
-        rel="preload"
-        as="image"
-        href={lcpAvif}
-        type="image/avif"
-        // @ts-expect-error fetchpriority not yet in DOM lib types in some setups
-        fetchpriority="high"
-      />
+      <link rel="preload" as="image" href={lcpAvif} type="image/avif" />
       <link rel="preload" as="image" href={lcpWebp} type="image/webp" />
+
       {/* ----------------------- HERO ----------------------- */}
       <section
         aria-labelledby="hero-heading"
@@ -47,7 +37,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8 grid gap-14 lg:grid-cols-12 lg:gap-10 lg:items-start">
           <div className="lg:col-span-7 relative z-10">
             <Reveal as="p" className="eyebrow text-champagne-600">
-              Boutique experiential marketing · Brand ambassadors
+              Boutique experiential marketing · Brand ambassadors · Nationwide
             </Reveal>
             <Reveal as="h1" delay={0.1}>
               <span
@@ -61,21 +51,20 @@ export default function HomePage() {
             <Reveal as="p" delay={0.2} className="mt-8 max-w-xl text-lg text-onyx-900/75 leading-relaxed">
               Good Goddess Almighty contracts, trains, and provides polished, highly
               capable ambassadors who help brands create memorable in-person and digital
-              experiences. Stand out with us.
+              experiences — at activations, launches, retail moments, trade shows, and
+              mobile tours. Stand out with us.
             </Reveal>
             <Reveal delay={0.3} className="mt-10 flex flex-wrap gap-3">
               <Link href="/contact" className="btn-primary">
                 Book brand ambassadors
               </Link>
-              <Link href="/work" className="btn-ghost">
-                View our work
+              <Link href="/services" className="btn-ghost">
+                Explore services
               </Link>
             </Reveal>
           </div>
 
-          {/* Hero composition */}
           <div className="lg:col-span-5 relative">
-            {/* Brand mark above the photo collage */}
             <Reveal className="mb-5 sm:mb-6" delay={0.05}>
               <div className="relative mx-auto lg:mx-0 w-40 sm:w-48 lg:w-56 aspect-square">
                 <SmartImage
@@ -126,10 +115,6 @@ export default function HomePage() {
                 </div>
               </Reveal>
             </div>
-            <div
-              aria-hidden="true"
-              className="absolute -z-10 -top-10 -right-10 h-72 w-72 rounded-full bg-blush-200/60 blur-3xl"
-            />
           </div>
         </div>
 
@@ -146,9 +131,13 @@ export default function HomePage() {
                   'Brand Ambassadors',
                   'On-Site Activations',
                   'Event Staffing',
+                  'Sampling & Demos',
+                  'Mobile Tours',
+                  'Trade Show Activation',
                   'Influencer Campaigns',
                   'Fashion Showcases',
                   'Photography & Content',
+                  'Branded Merch',
                   'Product Launches',
                 ].map((w) => (
                   <span
@@ -165,8 +154,28 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ----------------------- PROOF STRIP ----------------------- */}
+      <section className="bg-ivory-100 py-16 sm:py-20" aria-labelledby="proof-heading">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <Reveal as="p" className="eyebrow text-champagne-600 text-center">
+            How we work
+          </Reveal>
+          <h2 id="proof-heading" className="sr-only">
+            How we work
+          </h2>
+          <ul className="mt-8 grid gap-px bg-onyx-900/10 sm:grid-cols-2 lg:grid-cols-4 overflow-hidden border border-onyx-900/10">
+            {PROOF.map((p, i) => (
+              <Reveal as="li" key={p.label} delay={i * 0.05} className="bg-ivory-100 p-7">
+                <p className="eyebrow text-onyx-900/50">{p.label}</p>
+                <p className="mt-3 display-serif italic text-xl leading-snug">{p.body}</p>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* ----------------------- BRAND PROMISE ----------------------- */}
-      <section className="bg-ivory-100 py-24 sm:py-32" aria-labelledby="promise-heading">
+      <section className="bg-ivory-50 py-24 sm:py-32" aria-labelledby="promise-heading">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Reveal as="p" className="eyebrow text-champagne-600">
@@ -182,30 +191,19 @@ export default function HomePage() {
             <Reveal as="p" delay={0.05}>
               We are a boutique experiential marketing and brand ambassador firm. We help
               brands show up in culture with intention — at launches, activations, retail
-              moments, showcases, and the press-worthy events in between.
+              moments, showcases, trade floors, and the press-worthy events in between.
             </Reveal>
             <Reveal as="p" delay={0.15}>
               Our ambassadors aren&apos;t booked from a database. They&apos;re cast,
               trained, and prepared for your brand specifically — so the people
               representing you in public match the standard you set in private.
             </Reveal>
-            <Reveal delay={0.25} className="pt-4 flex flex-wrap gap-x-10 gap-y-3 text-sm uppercase tracking-widest text-onyx-900/60">
-              <span>Brands</span>
-              <span>·</span>
-              <span>Launches</span>
-              <span>·</span>
-              <span>Activations</span>
-              <span>·</span>
-              <span>Showcases</span>
-              <span>·</span>
-              <span>Experiences</span>
-            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ----------------------- SERVICES ----------------------- */}
-      <section className="bg-ivory-50 py-24 sm:py-32" aria-labelledby="services-heading">
+      <section className="bg-ivory-100 py-24 sm:py-32" aria-labelledby="services-heading">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
@@ -227,9 +225,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          <ul className="mt-16 grid gap-px bg-onyx-900/10 sm:grid-cols-2 lg:grid-cols-4 overflow-hidden">
+          <ul className="mt-16 grid gap-px bg-onyx-900/10 sm:grid-cols-2 lg:grid-cols-3 overflow-hidden border border-onyx-900/10">
             {SERVICES.map((s, i) => (
-              <Reveal as="li" key={s.slug} delay={(i % 4) * 0.05}>
+              <Reveal as="li" key={s.slug} delay={(i % 3) * 0.05}>
                 <Link
                   href={`/services#${s.slug}`}
                   className="group block h-full bg-ivory-50 p-7 hover:bg-ivory-100 transition-colors"
@@ -367,10 +365,7 @@ export default function HomePage() {
             Let&apos;s build something
           </Reveal>
           <Reveal>
-            <h2
-              id="cta-heading"
-              className="display-serif text-display-lg mt-6 leading-[1.0]"
-            >
+            <h2 id="cta-heading" className="display-serif text-display-lg mt-6 leading-[1.0]">
               Ready to make your brand{' '}
               <em className="text-champagne-500">unforgettable</em>?
             </h2>
@@ -387,63 +382,6 @@ export default function HomePage() {
               Call {SITE.contact.phone}
             </a>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ----------------------- CONTACT PREVIEW ----------------------- */}
-      <section className="bg-ivory-50 py-24 sm:py-32" aria-labelledby="contact-preview-heading">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 grid gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-6">
-            <Reveal as="p" className="eyebrow text-champagne-600">
-              Contact
-            </Reveal>
-            <Reveal>
-              <h2
-                id="contact-preview-heading"
-                className="display-serif text-display-md mt-4"
-              >
-                A quick conversation goes a long way.
-              </h2>
-            </Reveal>
-            <Reveal as="p" delay={0.1} className="mt-6 text-lg text-onyx-900/75 leading-relaxed max-w-lg">
-              For brand teams, event producers, agency partners, and founders — we&apos;ll
-              reply within one business day.
-            </Reveal>
-          </div>
-          <dl className="lg:col-span-6 grid gap-px bg-onyx-900/10 sm:grid-cols-2 overflow-hidden border border-onyx-900/10">
-            <Reveal as="div" className="bg-ivory-50 p-7">
-              <dt className="eyebrow text-onyx-900/50">Email</dt>
-              <dd className="mt-3">
-                <a
-                  href={`mailto:${SITE.contact.email}`}
-                  className="display-serif italic text-xl hover:text-plum-700 transition-colors"
-                >
-                  {SITE.contact.email}
-                </a>
-              </dd>
-            </Reveal>
-            <Reveal as="div" delay={0.05} className="bg-ivory-50 p-7">
-              <dt className="eyebrow text-onyx-900/50">Phone</dt>
-              <dd className="mt-3">
-                <a
-                  href={SITE.contact.phoneHref}
-                  className="display-serif italic text-xl hover:text-plum-700 transition-colors"
-                >
-                  {SITE.contact.phone}
-                </a>
-              </dd>
-            </Reveal>
-            <Reveal as="div" delay={0.1} className="bg-ivory-50 p-7">
-              <dt className="eyebrow text-onyx-900/50">Based in</dt>
-              <dd className="mt-3 display-serif italic text-xl">
-                {SITE.contact.address.city}, {SITE.contact.address.region}
-              </dd>
-            </Reveal>
-            <Reveal as="div" delay={0.15} className="bg-ivory-50 p-7">
-              <dt className="eyebrow text-onyx-900/50">Available</dt>
-              <dd className="mt-3 display-serif italic text-xl">Nationwide</dd>
-            </Reveal>
-          </dl>
         </div>
       </section>
     </>

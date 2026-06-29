@@ -108,6 +108,14 @@ export function Footer() {
                 Accessibility
               </Link>
             </li>
+            <li>
+              <Link
+                href="/preview"
+                className="text-champagne-500 hover:text-champagne-500/80 transition-colors"
+              >
+                Preview new site
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

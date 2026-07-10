@@ -29,3 +29,9 @@ coverage/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# watch-folder inbox — keep the folder skeleton + docs, ignore dropped images
+# and the processed-originals archive (only optimized output gets committed)
+watch/*/*
+!watch/*/.gitkeep
+watch/_processed/

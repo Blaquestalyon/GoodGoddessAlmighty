@@ -38,6 +38,23 @@ npm run dev                  # → http://localhost:3000
 
 ---
 
+## Adding gallery images
+
+New images for the Work gallery are added through the `watch/` folder, with no manual code edits.
+
+1. Drop an image into the folder for its category: `watch/influencer/`, `watch/onsite/`, `watch/events/`, `watch/fashion/`, or `watch/photography/`.
+2. From the repo root, run the ingest script:
+
+   ```bash
+   python scripts/ingest-watch.py
+   ```
+
+The script optimizes the image, writes the `.jpg` / `.webp` / `.avif` versions into `public/images/<category>/`, names it in sequence, tags it with its category, and adds the entry to `src/data/portfolio.ts`. When it finishes it prints the exact `git add` / `commit` / `push` commands. Push, and Railway rebuilds with the image live.
+
+Accepted inputs: `.jpg`, `.jpeg`, `.png`, `.webp`, `.tif`, `.tiff`, `.bmp` (export iPhone `.heic` to JPEG first). Full details in [`watch/README.md`](./watch/README.md) and [`project-context/2026-07-10-watch-folder-workflow.md`](./project-context/2026-07-10-watch-folder-workflow.md).
+
+---
+
 ## Deploying to Railway
 
 1. **Push this repo to GitHub.** Railway connects via the GitHub integration.

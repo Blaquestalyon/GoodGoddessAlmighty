@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { PortfolioGallery } from '@/components/PortfolioGallery';
+import { V2Gallery } from '@/components/v2/V2Gallery';
 import { Reveal } from '@/components/Reveal';
 import { PORTFOLIO } from '@/data/portfolio';
 
@@ -14,42 +14,41 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
-      <section className="pt-32 pb-12 sm:pt-40 sm:pb-16 bg-ivory-50">
+      <section className="pt-36 pb-12 sm:pt-44 sm:pb-16">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <Reveal as="p" className="eyebrow text-champagne-600">
+          <Reveal as="p" className="v2-eyebrow">
             Work · {PORTFOLIO.length} pieces
           </Reveal>
           <Reveal as="h1">
-            <span className="display-serif text-display-lg mt-6 block leading-[0.98] max-w-4xl">
-              Brand moments,{' '}
-              <em className="text-plum-700">captured</em>.
+            <span className="v2-display text-v2-lg mt-6 block leading-[0.98] max-w-4xl">
+              Brand moments, <em className="text-fuchsia">captured</em>.
             </span>
           </Reveal>
-          <Reveal as="p" delay={0.1} className="mt-8 max-w-2xl text-lg text-onyx-900/75">
+          <Reveal as="p" delay={0.1} className="mt-8 max-w-2xl text-lg text-muted">
             A selection of recent activations, fashion showcases, influencer campaigns,
             and editorial work. Filter by discipline below.
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-ivory-50 pb-24 sm:pb-32" aria-label="Portfolio gallery">
+      <section className="pb-24 sm:pb-32" aria-label="Portfolio gallery">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <PortfolioGallery />
+          <V2Gallery />
         </div>
       </section>
 
-      <section className="bg-onyx-900 text-ivory-50 py-24 sm:py-32">
+      <section className="bg-obsidian border-t border-champagne-500/15 py-24 sm:py-32">
         <div className="mx-auto max-w-3xl px-5 sm:px-8 text-center">
-          <Reveal as="p" className="eyebrow text-champagne-500">
+          <Reveal as="p" className="v2-eyebrow">
             See similar work for your brand
           </Reveal>
           <Reveal>
-            <h2 className="display-serif text-display-md mt-4">
+            <h2 className="v2-display text-v2-md mt-4">
               Send us a brief and we&apos;ll come back with concepts.
             </h2>
           </Reveal>
           <Reveal delay={0.1} className="mt-10">
-            <Link href="/contact" className="btn-ghost-light">
+            <Link href="/contact" className="btn-cta">
               Inquire about a project
             </Link>
           </Reveal>

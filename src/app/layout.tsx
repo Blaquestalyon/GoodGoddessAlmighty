@@ -1,18 +1,19 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Inter } from 'next/font/google';
+import { Fraunces, Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
-import { RouteChrome } from '@/components/RouteChrome';
+import './spotlight.css';
+import { V2Header } from '@/components/v2/V2Header';
+import { V2Footer } from '@/components/v2/V2Footer';
+import { StickyCta } from '@/components/v2/StickyCta';
 import { SITE } from '@/data/site';
 
-const display = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
   display: 'swap',
-  variable: '--font-display',
+  variable: '--font-fraunces',
+  axes: ['opsz'],
 });
 
 const sans = Inter({
@@ -125,21 +126,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body className="min-h-screen bg-ivory-50 text-onyx-900 antialiased">
+    <html lang="en" className={`${fraunces.variable} ${sans.variable}`}>
+      <body className="v2 min-h-screen bg-ink text-ivory-50 antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:bg-onyx-900 focus:text-ivory-50"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:bg-champagne-500 focus:text-onyx-900"
         >
           Skip to main content
         </a>
-        <RouteChrome>
-          <Header />
-        </RouteChrome>
+        <V2Header />
         <main id="main">{children}</main>
-        <RouteChrome>
-          <Footer />
-        </RouteChrome>
+        <V2Footer />
+        <StickyCta />
         <Script
           id="ld-json"
           type="application/ld+json"

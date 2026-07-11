@@ -5,12 +5,10 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { NAV } from '@/data/site';
 
-/** Live-preview nav — same labels as NAV, routed to the /v2 pages. */
-const V2_NAV = NAV.map((n) => ({
-  href: n.href === '/' ? '/v2' : `/v2${n.href}`,
-  label: n.label,
-}));
-
+/**
+ * SPOTLIGHT site header — solid ink with gold hairline, fuchsia
+ * "Book ambassadors" CTA visible at every breakpoint (mobile included).
+ */
 export function V2Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -37,30 +35,18 @@ export function V2Header() {
   }, [open]);
 
   const isActive = (href: string) =>
-    href === '/v2' ? pathname === '/v2' : pathname.startsWith(href);
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 border-b ${
-        scrolled || open
-          ? 'bg-ink/90 backdrop-blur border-champagne-500/25'
-          : 'bg-transparent border-transparent'
+      className={`fixed inset-x-0 top-0 z-50 bg-ink/90 backdrop-blur transition-all duration-500 border-b ${
+        scrolled || open ? 'border-champagne-500/25' : 'border-champagne-500/10'
       }`}
     >
-      {/* Preview ribbon */}
-      <div className="bg-obsidian border-b border-champagne-500/20">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 py-1.5 flex items-center justify-between gap-4 text-[0.65rem] tracking-[0.2em] uppercase">
-          <span className="text-champagne-500">Preview · v2 — Spotlight</span>
-          <Link href="/" className="text-muted hover:text-ivory-50 transition-colors py-1">
-            Back to current site →
-          </Link>
-        </div>
-      </div>
-
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:px-8">
         <Link
-          href="/v2"
-          aria-label="Good Goddess Almighty — home (v2 preview)"
+          href="/"
+          aria-label="Good Goddess Almighty — home"
           className="flex items-center gap-3 text-ivory-50 min-h-[44px]"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -77,7 +63,7 @@ export function V2Header() {
 
         <nav aria-label="Primary" className="hidden lg:block">
           <ul className="flex items-center gap-8 text-sm tracking-widest uppercase">
-            {V2_NAV.map((item) => {
+            {NAV.map((item) => {
               const active = isActive(item.href);
               return (
                 <li key={item.href}>
@@ -105,7 +91,7 @@ export function V2Header() {
         <div className="flex items-center gap-2 sm:gap-4">
           {/* Fuchsia CTA — visible on mobile too */}
           <Link
-            href="/v2/contact"
+            href="/contact"
             className="btn-cta !min-h-[44px] !px-4 !py-2.5 sm:!px-5 text-[0.7rem] sm:text-xs"
           >
             Book ambassadors
@@ -114,7 +100,7 @@ export function V2Header() {
             type="button"
             className="lg:hidden -mr-2 p-3 text-ivory-50"
             aria-expanded={open}
-            aria-controls="v2-mobile-nav"
+            aria-controls="mobile-nav"
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((v) => !v)}
           >
@@ -132,14 +118,14 @@ export function V2Header() {
 
       {/* Mobile nav */}
       <div
-        id="v2-mobile-nav"
+        id="mobile-nav"
         className={`lg:hidden overflow-hidden transition-[max-height] duration-500 ease-out ${
           open ? 'max-h-[80vh]' : 'max-h-0'
         }`}
       >
         <nav aria-label="Mobile" className="border-t border-champagne-500/20 bg-ink">
           <ul className="px-5 sm:px-8 py-6 space-y-1">
-            {V2_NAV.map((item) => {
+            {NAV.map((item) => {
               const active = isActive(item.href);
               return (
                 <li key={item.href}>
@@ -159,7 +145,7 @@ export function V2Header() {
               );
             })}
             <li className="pt-6">
-              <Link href="/v2/contact" className="btn-cta w-full">
+              <Link href="/contact" className="btn-cta w-full">
                 Book ambassadors
               </Link>
             </li>

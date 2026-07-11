@@ -1,11 +1,6 @@
 import Link from 'next/link';
 import { NAV, SITE } from '@/data/site';
 
-const V2_NAV = NAV.map((n) => ({
-  href: n.href === '/' ? '/v2' : `/v2${n.href}`,
-  label: n.label,
-}));
-
 export function V2Footer() {
   const year = new Date().getFullYear();
   const socials = Object.entries(SITE.social).filter(([, v]) => Boolean(v)) as [
@@ -26,7 +21,7 @@ export function V2Footer() {
           tailored team and a same-week proposal.
         </p>
         <div className="mt-10 flex flex-wrap gap-3 justify-center">
-          <Link href="/v2/contact" className="btn-cta">
+          <Link href="/contact" className="btn-cta">
             Start a project
           </Link>
           <a href={SITE.contact.phoneHref} className="btn-outline">
@@ -59,7 +54,7 @@ export function V2Footer() {
           <div className="lg:col-span-3">
             <p className="v2-eyebrow">Explore</p>
             <ul className="mt-5 space-y-3 text-muted">
-              {V2_NAV.map((n) => (
+              {NAV.map((n) => (
                 <li key={n.href}>
                   <Link
                     href={n.href}
@@ -69,14 +64,6 @@ export function V2Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="/"
-                  className="hover:text-champagne-500 transition-colors py-1 inline-block"
-                >
-                  Back to current site
-                </Link>
-              </li>
             </ul>
           </div>
 

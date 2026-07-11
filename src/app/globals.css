@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --font-display: 'Cormorant Garamond', Georgia, serif;
+  /* Display face is Fraunces (set by next/font in the root layout).
+     Georgia fallback keeps legacy .display-serif pages rendering serif. */
+  --font-display: var(--font-fraunces, Georgia), Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
@@ -14,8 +16,8 @@ html {
 }
 
 body {
-  background-color: theme('colors.ivory.50');
-  color: theme('colors.onyx.900');
+  background-color: theme('colors.ink');
+  color: theme('colors.ivory.50');
   font-family: var(--font-sans);
   font-feature-settings: 'ss01', 'ss02', 'cv11';
 }

@@ -1,0 +1,172 @@
+/*
+ * SPOTLIGHT design system — promoted from the /v2 preview on 2026-07-11.
+ * Rules are scoped under the .v2 class, which now lives on <body>.
+ */
+
+.v2 {
+  background-color: #0b0a0a; /* ink */
+  color: #fbf8f2; /* ivory */
+  font-family: var(--font-sans);
+}
+
+.v2 ::selection {
+  background-color: #ff2e88;
+  color: #0b0a0a;
+}
+
+/* Focus — champagne ring on ink, high visibility */
+.v2 *:focus-visible {
+  outline: 2px solid #c8a96a;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --- Type utilities ----------------------------------------------- */
+
+.v2 .v2-display {
+  font-family: var(--font-fraunces, Georgia), Georgia, serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 144;
+}
+
+.v2 .v2-display em,
+.v2 .v2-display .v2-italic {
+  font-style: italic;
+  font-weight: 480;
+}
+
+.v2 .v2-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #c8a96a; /* champagne */
+}
+
+/* Gold hairline rule */
+.v2 .v2-rule {
+  display: block;
+  height: 1px;
+  width: 3rem;
+  background-color: #c8a96a;
+}
+
+/* --- Buttons ------------------------------------------------------- */
+
+/* Primary: fuchsia fill + INK text (5.65:1 — AA at any size) */
+.v2 .btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  background-color: #ff2e88;
+  color: #0b0a0a;
+  padding: 1rem 1.75rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.v2 .btn-cta:hover {
+  background-color: #e4c88a; /* gold-hi swap on hover keeps ink text AA (12.2:1) */
+  box-shadow: 0 0 32px rgba(255, 46, 136, 0.35);
+}
+
+/* Secondary: gold hairline outline, ivory text */
+.v2 .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  border: 1px solid rgba(200, 169, 106, 0.6);
+  color: #fbf8f2;
+  padding: 1rem 1.75rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 2px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.v2 .btn-outline:hover {
+  border-color: #c8a96a;
+  background-color: rgba(200, 169, 106, 0.08);
+}
+
+/* Text link: gold underline */
+.v2 .link-gold {
+  color: #c8a96a;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(200, 169, 106, 0.5);
+  transition: text-decoration-color 0.3s ease, color 0.3s ease;
+}
+.v2 .link-gold:hover {
+  color: #e4c88a;
+  text-decoration-color: #e4c88a;
+}
+
+/* --- Imagery: shared grade + ink matting + caption scrim ----------- */
+
+/* One subtle grade so pro shots, phone photos, and screenshots cohere */
+.v2 .v2-grade img {
+  filter: saturate(0.94) contrast(1.04) brightness(0.98);
+}
+
+/* Ink matting frame around every tile */
+.v2 .v2-mat {
+  background-color: #060506;
+  border: 1px solid rgba(200, 169, 106, 0.16);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* Caption legibility scrim — always on, deepens on hover */
+.v2 .v2-scrim {
+  background: linear-gradient(
+    to top,
+    rgba(6, 5, 6, 0.82) 0%,
+    rgba(6, 5, 6, 0.38) 34%,
+    rgba(6, 5, 6, 0) 62%
+  );
+}
+
+/* Spotlight hover — vignette focus + lift (GPU transforms only) */
+.v2 .v2-spot {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+@media (hover: hover) {
+  .v2 .v2-spot-frame:hover .v2-spot,
+  .v2 .v2-spot-frame:focus-visible .v2-spot {
+    transform: scale(1.035);
+  }
+  .v2 .v2-vignette {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(6, 5, 6, 0) 42%,
+      rgba(6, 5, 6, 0.55) 100%
+    );
+  }
+  .v2 .v2-spot-frame:hover .v2-vignette,
+  .v2 .v2-spot-frame:focus-visible .v2-vignette {
+    opacity: 1;
+  }
+}
+
+/* --- Reduced motion ------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .v2 .v2-spot,
+  .v2 .v2-vignette,
+  .v2 .btn-cta,
+  .v2 .btn-outline {
+    transition-duration: 0.01ms !important;
+  }
+}

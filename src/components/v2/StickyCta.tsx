@@ -20,7 +20,7 @@ export function StickyCta() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  if (pathname.startsWith('/v2/contact')) return null;
+  if (pathname.startsWith('/contact')) return null;
 
   return (
     <div
@@ -29,7 +29,7 @@ export function StickyCta() {
       }`}
     >
       <div className="bg-obsidian/95 backdrop-blur border-t border-champagne-500/25 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-        <Link href="/v2/contact" className="btn-cta w-full">
+        <Link href="/contact" className="btn-cta w-full">
           Book ambassadors
         </Link>
       </div>

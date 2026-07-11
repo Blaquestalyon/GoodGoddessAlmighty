@@ -79,7 +79,7 @@ export default function HomePage() {
               experiences — at activations, launches, retail moments, trade shows, and
               mobile tours. Stand out with us.
             </Reveal>
-            <Reveal delay={0.3} className="mt-10 flex flex-wrap gap-3">
+            <Reveal id="hero-cta" delay={0.3} className="mt-10 flex flex-wrap gap-3">
               <Link href="/contact" className="btn-cta">
                 Book brand ambassadors
               </Link>

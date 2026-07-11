@@ -19,6 +19,19 @@ const nextConfig = {
         ],
       },
       {
+        // HTML pages (everything except the hashed asset folders) must never
+        // be cached by a browser or a CDN. A deploy renames the hashed JS/CSS
+        // under /_next/static, so a cached HTML page would keep pointing at
+        // files the server no longer has — the stale-cache failure that broke
+        // the contact form. Forcing revalidation means every visitor always
+        // gets HTML that matches the current build. The hashed assets below
+        // are excluded and keep their long, immutable caching.
+        source: '/((?!_next/static|_next/image|images/).*)',
+        headers: [
+          { key: 'Cache-Control', value: 'no-cache, must-revalidate' },
+        ],
+      },
+      {
         source: '/images/(.*)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },

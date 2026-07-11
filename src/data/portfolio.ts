@@ -24,7 +24,8 @@ export const CATEGORIES: { id: PortfolioCategory; label: string; description: st
   { id: "photography", label: "Photography", description: "Editorial content captured on the day, ready to publish." },
 ];
 
-export const PORTFOLIO: PortfolioItem[] = [
+export const PORTFOLIO: PortfolioItem[
+] = [
   { src: "/images/influencer/influencer-01.jpg", w: 591, h: 1280, category: "influencer", alt: "Influencer Work — frame 1" },
   { src: "/images/influencer/influencer-02.jpg", w: 960, h: 1280, category: "influencer", alt: "Influencer Work — frame 2" },
   { src: "/images/influencer/influencer-03.jpg", w: 1280, h: 960, category: "influencer", alt: "Influencer Work — frame 3" },
@@ -92,6 +93,7 @@ export const PORTFOLIO: PortfolioItem[] = [
   { src: "/images/events/events-28.jpg", w: 1080, h: 1440, category: "events", alt: "Events — Nightclub brand activation with Hoop Culture athlete attendee" },
   { src: "/images/events/events-29.jpg", w: 1080, h: 1440, category: "events", alt: "Events — Jameson Irish Whiskey 'Matchday is Bigger in Texas' activation with branded ambassador and barrel display" },
   { src: "/images/events/events-30.jpg", w: 1280, h: 720, category: "events", alt: "Events — Little Spoon outdoor branded tent activation with two ambassadors, sampling table, and prize wheel" },
+  { src: "/images/events/events-31.jpg", w: 1200, h: 1600, category: "events", alt: "Events — frame 31" },
   { src: "/images/fashion/fashion-01.jpg", w: 1080, h: 1080, category: "fashion", alt: "Fashion Showcase — frame 1" },
   { src: "/images/fashion/fashion-02.jpg", w: 960, h: 715, category: "fashion", alt: "Fashion Showcase — frame 2" },
   { src: "/images/fashion/fashion-03.jpg", w: 1066, h: 1600, category: "fashion", alt: "Fashion Showcase — frame 3" },

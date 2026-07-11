@@ -68,6 +68,15 @@ export function Header() {
                 </li>
               );
             })}
+            {/* Temporary link to the v2 live preview — remove on promotion. */}
+            <li>
+              <Link
+                href="/v2"
+                className="relative py-1 transition-colors text-plum-700 hover:text-onyx-900"
+              >
+                Preview (v2)
+              </Link>
+            </li>
           </ul>
         </nav>
 
@@ -125,6 +134,16 @@ export function Header() {
                 </li>
               );
             })}
+            {/* Temporary link to the v2 live preview — remove on promotion. */}
+            <li>
+              <Link
+                href="/v2"
+                className="flex items-center justify-between py-4 border-b border-onyx-900/10 text-2xl display-serif text-plum-700"
+              >
+                <span>Preview (v2)</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </li>
             <li className="pt-6">
               <Link href="/contact" className="btn-primary w-full">
                 Book ambassadors

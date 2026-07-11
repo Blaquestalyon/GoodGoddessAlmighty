@@ -4,6 +4,7 @@ import Script from 'next/script';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { RouteChrome } from '@/components/RouteChrome';
 import { SITE } from '@/data/site';
 
 const display = Cormorant_Garamond({
@@ -132,9 +133,13 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <Header />
+        <RouteChrome>
+          <Header />
+        </RouteChrome>
         <main id="main">{children}</main>
-        <Footer />
+        <RouteChrome>
+          <Footer />
+        </RouteChrome>
         <Script
           id="ld-json"
           type="application/ld+json"

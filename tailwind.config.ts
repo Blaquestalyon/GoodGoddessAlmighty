@@ -38,10 +38,22 @@ const config: Config = {
           800: '#2A1722',
           900: '#1A0E15',
         },
+        // --- v2 (SPOTLIGHT) tokens — additive, used only under /v2 ---
+        ink: '#0B0A0A',
+        obsidian: '#060506',
+        elevated: '#171316',
+        muted: '#C9BFB2',
+        'gold-hi': '#E4C88A',
+        fuchsia: {
+          DEFAULT: '#FF2E88',
+          deep: '#D6156B',
+        },
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        // v2 display face (Fraunces) — variable set by the /v2 layout only.
+        fraunces: ['var(--font-fraunces)', 'Georgia', 'serif'],
       },
       fontSize: {
         // Editorial scale
@@ -49,6 +61,10 @@ const config: Config = {
         'display-lg': ['clamp(2.5rem, 6vw, 5.5rem)', { lineHeight: '1.0', letterSpacing: '-0.02em' }],
         'display-md': ['clamp(2rem, 4.5vw, 3.75rem)', { lineHeight: '1.05', letterSpacing: '-0.015em' }],
         'eyebrow': ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.2em' }],
+        // v2 (SPOTLIGHT) display scale — additive, used only under /v2.
+        'v2-xl': ['clamp(3.5rem, 9vw, 8.5rem)', { lineHeight: '0.95', letterSpacing: '-0.02em' }],
+        'v2-lg': ['clamp(2.75rem, 6vw, 6rem)', { lineHeight: '1.0', letterSpacing: '-0.02em' }],
+        'v2-md': ['clamp(2rem, 4.5vw, 3.75rem)', { lineHeight: '1.05', letterSpacing: '-0.015em' }],
       },
       letterSpacing: {
         widest: '0.25em',

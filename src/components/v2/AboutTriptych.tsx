@@ -2,29 +2,32 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { PORTFOLIO, type PortfolioItem } from '@/data/portfolio';
+import {
+  PORTFOLIO,
+  type PortfolioCategory,
+  type PortfolioItem,
+} from '@/data/portfolio';
 import { SpotlightTile } from './SpotlightTile';
 
 /**
  * About-page triptych — three LARGE frames that reshuffle on every load.
  *
- * The pool is a curated set of portrait-oriented frames, each resolved
- * against PORTFOLIO and filtered — so a renamed or missing file simply
- * drops out of the pool and a broken image can never render. Selection
- * happens on the client after mount, which keeps the page statically
- * cached (fast) while still giving a fresh trio on each visit. Only the
- * three chosen images are ever requested, so nothing extra is downloaded.
+ * The pool is drawn straight from PORTFOLIO, limited to the three
+ * activation-proof categories below and to portrait/square frames (so the
+ * 4:5 crops always read as intentional, never a chopped landscape). Because
+ * it filters PORTFOLIO directly, any future events / influencer / on-site
+ * image dropped in via the ingest workflow joins the rotation automatically,
+ * and a renamed or missing file can never surface as a broken image.
+ *
+ * Selection happens on the client after mount, which keeps the page
+ * statically cached (fast) while still giving a fresh trio on each visit.
+ * Only the three chosen images are ever requested, so nothing extra loads.
  */
-const POOL: PortfolioItem[] = [
-  'onsite-17.jpg', 'onsite-19.jpg', 'onsite-20.jpg', 'onsite-21.jpg',
-  'onsite-22.jpg', 'onsite-24.jpg', 'onsite-25.jpg', 'onsite-26.jpg',
-  'events-27.jpg', 'events-28.jpg', 'events-29.jpg',
-  'fashion-03.jpg', 'fashion-04.jpg', 'fashion-08.jpg', 'fashion-09.jpg', 'fashion-12.jpg',
-  'influencer-08.jpg', 'influencer-09.jpg', 'influencer-10.jpg', 'influencer-11.jpg',
-  'photo-04.jpg', 'photo-09.jpg', 'photo-16.jpg', 'photo-24.jpg', 'photo-34.jpg', 'photo-35.jpg',
-]
-  .map((s) => PORTFOLIO.find((p) => p.src.endsWith(s)))
-  .filter((p): p is PortfolioItem => Boolean(p));
+const INCLUDED_CATEGORIES: PortfolioCategory[] = ['events', 'influencer', 'onsite'];
+
+const POOL: PortfolioItem[] = PORTFOLIO.filter(
+  (p) => INCLUDED_CATEGORIES.includes(p.category) && p.h >= p.w,
+);
 
 function pickThree(): PortfolioItem[] {
   const pool = [...POOL];

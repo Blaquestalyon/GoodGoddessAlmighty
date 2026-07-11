@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal';
 import { V2SectionHeader } from '@/components/v2/V2SectionHeader';
-import { SpotlightTile } from '@/components/v2/SpotlightTile';
-import { PORTFOLIO } from '@/data/portfolio';
+import { AboutTriptych } from '@/components/v2/AboutTriptych';
 import { PILLARS, SITE } from '@/data/site';
 
 export const metadata: Metadata = {
@@ -12,12 +11,6 @@ export const metadata: Metadata = {
     'Good Goddess Almighty is a boutique brand ambassador and experiential marketing firm — built on training, presentation, and brand-safe representation.',
   alternates: { canonical: '/about' },
 };
-
-const ABOUT_FRAMES = [
-  PORTFOLIO.find((p) => p.src.endsWith('events-03.jpg'))!,
-  PORTFOLIO.find((p) => p.src.endsWith('fashion-02.jpg'))!,
-  PORTFOLIO.find((p) => p.src.endsWith('onsite-07.jpg'))!,
-];
 
 const STATS = [
   {
@@ -96,37 +89,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Image triptych — matted, graded, spotlight-lit */}
+      {/* Image triptych — three large frames, reshuffled on every load */}
       <section className="pb-24" aria-hidden="true">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 grid grid-cols-12 gap-3 sm:gap-4">
-          <Reveal className="col-span-12 sm:col-span-5">
-            <div className="group v2-spot-frame">
-              <SpotlightTile
-                item={ABOUT_FRAMES[0]}
-                sizes="(min-width: 1024px) 420px, 92vw"
-                aspect="aspect-[4/5]"
-              />
-            </div>
-          </Reveal>
-          <Reveal className="col-span-6 sm:col-span-4" delay={0.1}>
-            <div className="group v2-spot-frame">
-              <SpotlightTile
-                item={ABOUT_FRAMES[1]}
-                sizes="(min-width: 1024px) 340px, 46vw"
-                aspect="aspect-square"
-              />
-            </div>
-          </Reveal>
-          <Reveal className="col-span-6 sm:col-span-3" delay={0.2}>
-            <div className="group v2-spot-frame">
-              <SpotlightTile
-                item={ABOUT_FRAMES[2]}
-                sizes="(min-width: 1024px) 260px, 46vw"
-                aspect="aspect-[3/4]"
-              />
-            </div>
-          </Reveal>
-        </div>
+        <AboutTriptych />
       </section>
 
       {/* Why boutique — plum relief bento */}

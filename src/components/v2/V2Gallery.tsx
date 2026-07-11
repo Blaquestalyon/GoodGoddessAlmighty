@@ -23,6 +23,8 @@ export function V2Gallery() {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const openerRef = useRef<HTMLElement | null>(null);
+  const gridRef = useRef<HTMLUListElement>(null);
+  const prevFilter = useRef<Filter>('all');
 
   const items = useMemo(
     () => (filter === 'all' ? PORTFOLIO : PORTFOLIO.filter((p) => p.category === filter)),
@@ -83,19 +85,31 @@ export function V2Gallery() {
     };
   }, [open, close, next, prev]);
 
-  // Reset lightbox when the filter changes
+  // Reset lightbox when the filter changes; if the visitor filtered from
+  // deep in the page (sticky bar), bring them back to the top of the grid
+  // so the freshly filtered set starts in view.
   useEffect(() => {
     setOpen(null);
-  }, [filter]);
+    if (prevFilter.current === filter) return;
+    prevFilter.current = filter;
+    const grid = gridRef.current;
+    if (!grid) return;
+    const top = grid.getBoundingClientRect().top + window.scrollY - 240;
+    if (window.scrollY > top) {
+      window.scrollTo({ top: Math.max(0, top), behavior: reduce ? 'auto' : 'smooth' });
+    }
+  }, [filter, reduce]);
 
   const active = open !== null ? items[open] : null;
   const activeCaption = active ? captionFor(active) : null;
 
   return (
     <>
-      {/* Filter chips — pill radius is reserved for chips/tags */}
+      {/* Filter chips — pill radius is reserved for chips/tags.
+          Sticky below the fixed header so filtering is one tap away at any
+          scroll depth in the 123-tile grid. */}
       <div
-        className="flex flex-wrap items-center gap-2 sm:gap-3 mt-12 mb-10"
+        className="sticky top-[72px] z-30 flex flex-wrap items-center gap-2 sm:gap-3 mt-12 mb-10 py-4 -mx-5 px-5 sm:-mx-8 sm:px-8 bg-ink/95 backdrop-blur border-b border-champagne-500/15"
         role="tablist"
         aria-label="Portfolio filters"
       >
@@ -127,7 +141,7 @@ export function V2Gallery() {
       )}
 
       {/* Fixed-aspect grid — zero CLS, ink matting coheres the mixed set */}
-      <ul className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+      <ul ref={gridRef} className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         <AnimatePresence>
           {items.map((item, i) => (
             <motion.li

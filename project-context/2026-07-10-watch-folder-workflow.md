@@ -44,8 +44,10 @@ handles them all.
    keeps `photo-NN`). The prefix is detected from the images already on disk.
 4. Reads the final pixel width and height.
 5. Adds an entry to `src/data/portfolio.ts`, tagged with the category folder it
-   came from, inserted with the rest of that category's images. Default alt text
-   follows the site's existing pattern: `<Category label> — frame <N>`.
+   came from, inserted with the rest of that category's images. The script
+   writes a temporary placeholder alt (`<Category label> — frame <N>`) that
+   Claude replaces with a real caption before anything is committed (see
+   "Captions are written automatically" below).
 6. Moves your original into `watch/_processed/`.
 
 ## Behavior and safety
@@ -58,13 +60,24 @@ handles them all.
 - Only the optimized output in `public/images/` and the updated `portfolio.ts`
   get committed. The dropped originals and `watch/_processed/` are git-ignored.
 
-## Want richer alt text on a specific image?
+## Captions are written automatically (standard step since 2026-07-13)
 
-The default tag is the category label. If a particular image deserves a
-descriptive caption (like the recent hand-written entries, e.g. "Total Wine
-tasting bar with The Well bottle lineup"), edit that one entry's `alt` in
-`src/data/portfolio.ts` after ingest, or ask Claude to write it. The script will
-preserve it on every future run.
+Every gallery photo carries a descriptive caption. It lives in the entry's
+`alt` in `src/data/portfolio.ts`; the gallery shows the text after the em dash
+on tile hover and in the lightbox. The full gallery (123 images) was captioned
+on 2026-07-13, and captioning is now a standing part of ingest:
+
+1. The script writes its `frame <N>` placeholder as usual.
+2. Claude views each newly ingested photo and replaces the placeholder with a
+   descriptive caption in the established style — 8 to 20 words covering who,
+   what, the setting, and notable products or signage.
+3. Brand rule: a brand, product, or venue is named only when its text is
+   clearly legible in the photo. Brands are never guessed or invented.
+4. The captions arrive in the same `portfolio.ts` diff you review before
+   pushing, so nothing goes live unseen.
+
+The script never rewrites a caption on later runs. To override one, just edit
+that entry's `alt` in `portfolio.ts` — it will be preserved.
 
 ## Requirements
 

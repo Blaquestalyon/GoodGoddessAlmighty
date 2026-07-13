@@ -173,7 +173,7 @@ export default function HomePage() {
       {/* ----------------------- FEATURED WORK (the proof engine, high on the page) ----------------------- */}
       <section
         id="work"
-        className="py-24 sm:py-32 scroll-mt-28"
+        className="pt-24 sm:pt-32 pb-0 scroll-mt-28"
         aria-labelledby="work-heading"
       >
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -210,7 +210,7 @@ export default function HomePage() {
 
       {/* ----------------------- PROOF ----------------------- */}
       <section
-        className="py-20 sm:py-24 border-y border-champagne-500/15"
+        className="pt-12 pb-20 sm:pt-14 sm:pb-24 border-y border-champagne-500/15"
         aria-labelledby="proof-heading"
       >
         <div className="mx-auto max-w-7xl px-5 sm:px-8">

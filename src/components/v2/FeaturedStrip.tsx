@@ -97,10 +97,10 @@ export function FeaturedStrip() {
   }
 
   return (
-    <div ref={sectionRef} className="relative h-[300vh]">
+    <div ref={sectionRef} className="relative h-[240vh]">
       <div
         ref={viewportRef}
-        className="sticky top-0 flex h-screen items-center overflow-hidden"
+        className="sticky top-0 flex h-[66vh] sm:h-[80vh] lg:h-[88vh] items-center overflow-hidden"
       >
         <motion.ul
           ref={trackRef}

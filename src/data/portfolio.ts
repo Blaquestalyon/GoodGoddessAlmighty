@@ -3,6 +3,7 @@
 
 export type PortfolioCategory =
   | "influencer"
+  | "clientposts"
   | "onsite"
   | "events"
   | "fashion"
@@ -18,6 +19,7 @@ export interface PortfolioItem {
 
 export const CATEGORIES: { id: PortfolioCategory; label: string; description: string }[] = [
   { id: "influencer", label: "Influencer Work", description: "Creator-led brand storytelling." },
+  { id: "clientposts", label: "Client Posts", description: "Brand-published content from client channels." },
   { id: "onsite", label: "On-Site Activations", description: "Activations that feel like a guest experience, not a sales floor." },
   { id: "events", label: "Events", description: "Trained ambassadors, ready to host, hand-sell, and connect." },
   { id: "fashion", label: "Fashion Showcase", description: "Runway, retail, and lookbook moments." },
@@ -39,6 +41,9 @@ export const PORTFOLIO: PortfolioItem[
   { src: "/images/influencer/influencer-11.jpg", w: 1080, h: 1440, category: "influencer", alt: "Influencer Work — couple toasting with sparkling wine during a lifestyle content shoot" },
   { src: "/images/influencer/influencer-12.jpg", w: 588, h: 977, category: "influencer", alt: "Influencer Work — Low Season Signature Scent Perfume Oil roller shown against a blue backdrop on the brand's product page" },
   { src: "/images/influencer/influencer-13.jpg", w: 588, h: 977, category: "influencer", alt: "Influencer Work — Low Season After Sun Recovery Spray misted mid-air on the brand's product page" },
+  { src: "/images/clientposts/clientposts-01.jpg", w: 588, h: 735, category: "clientposts", alt: "Client Posts — @jwmarriottatx feature of a guest at the JW Lobby Bar beneath the gold sputnik chandelier" },
+  { src: "/images/clientposts/clientposts-02.jpg", w: 588, h: 735, category: "clientposts", alt: "Client Posts — @moxyaustin post of four guests sharing tacos in the HOWDY booth at Zombie Taco" },
+  { src: "/images/clientposts/clientposts-03.jpg", w: 588, h: 735, category: "clientposts", alt: "Client Posts — @moxyaustin post of three guests toasting on a guest room bed with the room's rotary phone alongside" },
   { src: "/images/onsite/onsite-01.jpg", w: 960, h: 1280, category: "onsite", alt: "On-Site Activations — Brand ambassador presenting Yola Mezcal at a draped tasting table beside stacked Bliss Family Vineyards wine cases" },
   { src: "/images/onsite/onsite-02.jpg", w: 960, h: 1280, category: "onsite", alt: "On-Site Activations — Milam & Greene whiskey tasting with branded ambassador, table signage, and cap beside a Remy Martin display" },
   { src: "/images/onsite/onsite-03.jpg", w: 960, h: 1280, category: "onsite", alt: "On-Site Activations — Brand ambassador presenting bottled cocktails at a draped table beside a Wolcott Kentucky Straight Bourbon display" },
@@ -67,6 +72,8 @@ export const PORTFOLIO: PortfolioItem[
   { src: "/images/onsite/onsite-26.jpg", w: 1200, h: 1600, category: "onsite", alt: "On-Site Activations — LoDo THC Beverages ambassador at Total Wine tasting bar with The Well bottle lineup and Houston Astros / Sun Cruiser display" },
   { src: "/images/onsite/onsite-27.jpg", w: 960, h: 1280, category: "onsite", alt: "On-Site Activations — El Bandido Yankee Tequila ambassador at a liquor store tasting table with Blanco and Reposado bottles chilling on ice" },
   { src: "/images/onsite/onsite-28.jpg", w: 960, h: 1280, category: "onsite", alt: "On-Site Activations — Lucky Stash ambassador presenting the green decanter bottle at an in-store tasting table beneath the tequila aisle signs" },
+  { src: "/images/onsite/onsite-29.jpg", w: 960, h: 1280, category: "onsite", alt: "On-Site Activations — El Bandido Yankee Tequila ambassador at a liquor store tasting table with Blanco and Reposado bottles, branded bandanas, and lip balms" },
+  { src: "/images/onsite/onsite-30.jpg", w: 1280, h: 960, category: "onsite", alt: "On-Site Activations — Lucky Stash ambassador at a liquor store sampling counter with the green bottles chilling on ice" },
   { src: "/images/events/events-01.jpg", w: 1193, h: 1280, category: "events", alt: "Events — Four brand ambassadors posing beneath the El Paso Street arch on a sunny downtown street" },
   { src: "/images/events/events-02.jpg", w: 960, h: 1280, category: "events", alt: "Events — Jameson brand ambassador in branded bucket hat serving a tray of drink samples at a soccer watch party bar" },
   { src: "/images/events/events-03.jpg", w: 960, h: 1280, category: "events", alt: "Events — Lucky Energy tailgate activation with brand ambassador and guest in Texas cap holding sample cans" },
@@ -101,6 +108,10 @@ export const PORTFOLIO: PortfolioItem[
   { src: "/images/events/events-32.jpg", w: 1200, h: 1600, category: "events", alt: "Events — El Bandido Yankee Tequila ambassadors in branded tanks and black cowboy hats on the convention floor" },
   { src: "/images/events/events-33.jpg", w: 1200, h: 1600, category: "events", alt: "Events — Ambassador presenting El Bandido Yankee Tequila Blanco at booth 207 beside the full bottle lineup and branded bandanas" },
   { src: "/images/events/events-34.jpg", w: 1200, h: 1600, category: "events", alt: "Events — Ambassador holding four El Bandido Yankee Tequila bottles behind the booth bar, Reposado and Añejo up front" },
+  { src: "/images/events/events-35.jpg", w: 1280, h: 960, category: "events", alt: "Events — Chérie Amour Lingerie ambassador at the booth 109 bridal expo table with boudoir portfolio displays and the brand banner" },
+  { src: "/images/events/events-36.jpg", w: 960, h: 1280, category: "events", alt: "Events — Chérie Amour ambassador in a beret presenting a boudoir print at the booth 506 lingerie display" },
+  { src: "/images/events/events-37.jpg", w: 1280, h: 960, category: "events", alt: "Events — Chérie Amour Lingerie booth 109 with brand ambassador, Agent Provocateur and Aubade banner, and boudoir sample albums" },
+  { src: "/images/events/events-38.jpg", w: 1280, h: 960, category: "events", alt: "Events — Chérie Amour ambassador beside the full booth 506 spread of boudoir albums and Lingerie and Boudoir brand banners" },
   { src: "/images/fashion/fashion-01.jpg", w: 1080, h: 1080, category: "fashion", alt: "Fashion Showcase — Four models striking poses in fur jackets and a blue jumpsuit inside a New York & Company window display" },
   { src: "/images/fashion/fashion-02.jpg", w: 960, h: 715, category: "fashion", alt: "Fashion Showcase — Model in a blue Greek-key trim mini dress posing on a red bench in a shoe boutique" },
   { src: "/images/fashion/fashion-03.jpg", w: 1066, h: 1600, category: "fashion", alt: "Fashion Showcase — Model in a checked sleeveless top and ripped jeans posing against a pool table under magenta lighting" },

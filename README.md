@@ -1,6 +1,6 @@
 # Good Goddess Almighty — Website
 
-A boutique experiential marketing & brand ambassador firm. Modern editorial site built with Next.js 14, TypeScript, Tailwind CSS, and Framer Motion. Deployed on Railway.
+A boutique experiential marketing & brand ambassador firm. Modern editorial site built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion. Deployed on Railway.
 
 > Tagline preserved from the legacy brand: **Fearless creativity for forward-thinking brands. Stand out with us.**
 
@@ -8,7 +8,7 @@ A boutique experiential marketing & brand ambassador firm. Modern editorial site
 
 ## Tech stack
 
-- **[Next.js 14](https://nextjs.org/)** — App Router, Server Components, Image optimisation
+- **[Next.js 15](https://nextjs.org/)** — App Router, Server Components, Image optimisation
 - **TypeScript** (strict)
 - **Tailwind CSS 3** — design tokens defined in `tailwind.config.ts`
 - **Framer Motion** — scroll reveals, lightbox, marquee (respects `prefers-reduced-motion`)

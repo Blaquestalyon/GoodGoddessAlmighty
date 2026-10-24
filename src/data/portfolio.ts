@@ -112,6 +112,7 @@ export const PORTFOLIO: PortfolioItem[
   { src: "/images/events/events-36.jpg", w: 960, h: 1280, category: "events", alt: "Events — Chérie Amour ambassador in a beret presenting a boudoir print at the booth 506 lingerie display" },
   { src: "/images/events/events-37.jpg", w: 1280, h: 960, category: "events", alt: "Events — Chérie Amour Lingerie booth 109 with brand ambassador, Agent Provocateur and Aubade banner, and boudoir sample albums" },
   { src: "/images/events/events-38.jpg", w: 1280, h: 960, category: "events", alt: "Events — Chérie Amour ambassador beside the full booth 506 spread of boudoir albums and Lingerie and Boudoir brand banners" },
+  { src: "/images/events/events-39.jpg", w: 720, h: 1280, category: "events", alt: "Events — Delta and American Express ambassador at the co-branded welcome desk with SLC and LA destination tags and branded totes" },
   { src: "/images/fashion/fashion-01.jpg", w: 1080, h: 1080, category: "fashion", alt: "Fashion Showcase — Four models striking poses in fur jackets and a blue jumpsuit inside a New York & Company window display" },
   { src: "/images/fashion/fashion-02.jpg", w: 960, h: 715, category: "fashion", alt: "Fashion Showcase — Model in a blue Greek-key trim mini dress posing on a red bench in a shoe boutique" },
   { src: "/images/fashion/fashion-03.jpg", w: 1066, h: 1600, category: "fashion", alt: "Fashion Showcase — Model in a checked sleeveless top and ripped jeans posing against a pool table under magenta lighting" },
